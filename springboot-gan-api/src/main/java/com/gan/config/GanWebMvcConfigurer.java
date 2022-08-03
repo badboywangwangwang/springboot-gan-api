@@ -3,7 +3,7 @@ package com.gan.config;
 
 import com.gan.common.Constants;
 import com.gan.config.handler.TokenToAdminUserMethodArgumentResolver;
-import com.gan.config.handler.TokenToMallUserMethodArgumentResolver;
+import com.gan.config.handler.TokenToUserMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GanWebMvcConfigurer extends WebMvcConfigurationSupport {
 
     @Autowired
-    private TokenToMallUserMethodArgumentResolver tokenToMallUserMethodArgumentResolver;
+    private TokenToUserMethodArgumentResolver tokenToMallUserMethodArgumentResolver;
     @Autowired
     private TokenToAdminUserMethodArgumentResolver tokenToAdminUserMethodArgumentResolver;
 

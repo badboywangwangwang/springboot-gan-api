@@ -4,7 +4,7 @@ package com.gan.config.handler;
 import com.gan.common.Constants;
 import com.gan.common.GanException;
 import com.gan.common.ServiceResultEnum;
-import com.gan.config.annotation.TokenToMallUser;
+import com.gan.config.annotation.TokenToUser;
 import com.gan.dao.GanUserMapper;
 import com.gan.dao.GanUserTokenMapper;
 import com.gan.entity.GanUser;
@@ -21,25 +21,25 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Component
-public class TokenToMallUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
+public class TokenToUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Autowired
     private GanUserMapper ganUserMapper;
     @Autowired
     private GanUserTokenMapper ganUserTokenMapper;
 
-    public TokenToMallUserMethodArgumentResolver() {
+    public TokenToUserMethodArgumentResolver() {
     }
 
     public boolean supportsParameter(MethodParameter parameter) {
-        if (parameter.hasParameterAnnotation(TokenToMallUser.class)) {
+        if (parameter.hasParameterAnnotation(TokenToUser.class)) {
             return true;
         }
         return false;
     }
 
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
-        if (parameter.getParameterAnnotation(TokenToMallUser.class) instanceof TokenToMallUser) {
+        if (parameter.getParameterAnnotation(TokenToUser.class) instanceof TokenToUser) {
             GanUser ganUser = null;
             String token = webRequest.getHeader("token");
             if (null != token && !"".equals(token) && token.length() == Constants.TOKEN_LENGTH) {

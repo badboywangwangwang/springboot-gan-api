@@ -10,7 +10,7 @@ import com.gan.api.gan.param.GanUserUpdateParam;
 import com.gan.api.gan.vo.GanUserVO;
 import com.gan.common.Constants;
 import com.gan.common.ServiceResultEnum;
-import com.gan.config.annotation.TokenToMallUser;
+import com.gan.config.annotation.TokenToUser;
 import com.gan.entity.GanUser;
 import com.gan.service.GanUserService;
 import com.gan.util.*;
@@ -55,7 +55,7 @@ public class GanPersonalAPI {
 
     @PostMapping("/user/logout")
     @ApiOperation(value = "登出接口", notes = "清除token")
-    public Result<String> logout(@TokenToMallUser GanUser loginGanUser) {
+    public Result<String> logout(@TokenToUser GanUser loginGanUser) {
         Boolean logoutResult = ganUserService.logout(loginGanUser.getUserId());
 
         logger.info("logout api,loginGanUser={}", loginGanUser.getUserId());
@@ -89,7 +89,7 @@ public class GanPersonalAPI {
 
     @PutMapping("/user/info")
     @ApiOperation(value = "修改用户信息", notes = "")
-    public Result updateInfo(@RequestBody @ApiParam("用户信息") GanUserUpdateParam ganUserUpdateParam, @TokenToMallUser GanUser loginGanUser) {
+    public Result updateInfo(@RequestBody @ApiParam("用户信息") GanUserUpdateParam ganUserUpdateParam, @TokenToUser GanUser loginGanUser) {
         Boolean flag = ganUserService.updateUserInfo(ganUserUpdateParam, loginGanUser.getUserId());
         if (flag) {
             //返回成功
@@ -104,7 +104,7 @@ public class GanPersonalAPI {
 
     @GetMapping("/user/info")
     @ApiOperation(value = "获取用户信息", notes = "")
-    public Result<GanUserVO> getUserDetail(@TokenToMallUser GanUser loginGanUser) {
+    public Result<GanUserVO> getUserDetail(@TokenToUser GanUser loginGanUser) {
         //已登录则直接返回
         GanUserVO ganUserVO = new GanUserVO();
         BeanUtil.copyProperties(loginGanUser, ganUserVO);
