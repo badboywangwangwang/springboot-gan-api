@@ -24,4 +24,13 @@ public class GanUser {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
+
+    private Byte memberType;
+
+    private Byte memberPay;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date membershipDue;
+
+
 }

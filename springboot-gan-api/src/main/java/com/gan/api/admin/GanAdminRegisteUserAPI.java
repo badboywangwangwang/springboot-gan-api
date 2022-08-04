@@ -47,7 +47,9 @@ public class GanAdminRegisteUserAPI {
         if (lockStatus != null) {
             params.put("orderStatus", lockStatus);
         }
+
         PageQueryUtil pageUtil = new PageQueryUtil(params);
+
         return ResultGenerator.genSuccessResult(ganUserService.getGanUsersPage(pageUtil));
     }
 
