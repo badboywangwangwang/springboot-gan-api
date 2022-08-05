@@ -1,6 +1,7 @@
+package com.gan.service.impl;
+
 import com.gan.api.gan.param.SaveCartItemParam;
 import com.gan.api.gan.param.UpdateCartItemParam;
-import com.gan.api.gan.vo.GanIndexConfigItemsVO;
 import com.gan.api.gan.vo.GanShoppingCartItemVO;
 import com.gan.common.Constants;
 import com.gan.common.GanException;

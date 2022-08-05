@@ -1,3 +1,5 @@
+package com.gan.api.gan;
+
 import com.gan.api.gan.param.SaveOrderParam;
 import com.gan.api.gan.vo.GanOrderDetailVO;
 import com.gan.api.gan.vo.GanOrderListVO;

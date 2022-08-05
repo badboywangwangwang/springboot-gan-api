@@ -74,7 +74,7 @@ public class GanCategoryServiceImpl implements GanCategoryService {
 
     @Override
     public List<GanIndexCategoryVO> getCategoriesForIndex() {
-        List<GanIndexCategoryVO> newBeeMallIndexCategoryVOS = new ArrayList<>();
+        List<GanIndexCategoryVO> ganIndexCategoryVOS = new ArrayList<>();
         //获取一级分类的固定数量的数据
         List<ItemsCategory> firstLevelCategories = itemsCategoryMapper.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), GanCategoryLevelEnum.LEVEL_ONE.getLevel(), Constants.INDEX_CATEGORY_NUMBER);
         if (!CollectionUtils.isEmpty(firstLevelCategories)) {
@@ -106,20 +106,20 @@ public class GanCategoryServiceImpl implements GanCategoryService {
                         //根据 parentId 将 thirdLevelCategories 分组
                         Map<Long, List<SecondLevelCategoryVO>> secondLevelCategoryVOMap = secondLevelCategoryVOS.stream().collect(groupingBy(SecondLevelCategoryVO::getParentId));
                         for (ItemsCategory firstCategory : firstLevelCategories) {
-                            GanIndexCategoryVO newBeeMallIndexCategoryVO = new GanIndexCategoryVO();
-                            BeanUtil.copyProperties(firstCategory, newBeeMallIndexCategoryVO);
-                            //如果该一级分类下有数据则放入 newBeeMallIndexCategoryVOS 对象中
+                            GanIndexCategoryVO ganIndexCategoryVO = new GanIndexCategoryVO();
+                            BeanUtil.copyProperties(firstCategory, ganIndexCategoryVO);
+                            //如果该一级分类下有数据则放入 ganIndexCategoryVO 对象中
                             if (secondLevelCategoryVOMap.containsKey(firstCategory.getCategoryId())) {
                                 //根据一级分类的id取出secondLevelCategoryVOMap分组中的二级级分类list
                                 List<SecondLevelCategoryVO> tempGoodsCategories = secondLevelCategoryVOMap.get(firstCategory.getCategoryId());
-                                newBeeMallIndexCategoryVO.setSecondLevelCategoryVOS(tempGoodsCategories);
-                                newBeeMallIndexCategoryVOS.add(newBeeMallIndexCategoryVO);
+                                ganIndexCategoryVO.setSecondLevelCategoryVOS(tempGoodsCategories);
+                                ganIndexCategoryVOS.add(ganIndexCategoryVO);
                             }
                         }
                     }
                 }
             }
-            return newBeeMallIndexCategoryVOS;
+            return ganIndexCategoryVOS;
         } else {
             return null;
         }

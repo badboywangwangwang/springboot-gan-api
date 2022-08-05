@@ -1,3 +1,5 @@
+package com.gan.service.impl;
+
 import com.gan.api.gan.vo.GanIndexConfigItemsVO;
 import com.gan.common.ServiceResultEnum;
 import com.gan.dao.GanItemsMapper;
@@ -29,14 +31,19 @@ public class GanIndexConfigServiceImpl implements GanIndexConfigService {
 
 
     @Override
+    public IndexConfig getIndexConfigById(Long id) {
+        return indexConfigMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<GanIndexConfigItemsVO> getConfigItemsesForIndex(int configType, int number) {
         List<GanIndexConfigItemsVO> ganIndexConfigItemsVOS = new ArrayList<>(number);
         List<IndexConfig> indexConfigs = indexConfigMapper.findIndexConfigsByTypeAndNum(configType, number);
         if (!CollectionUtils.isEmpty(indexConfigs)) {
             //取出所有的goodsId
             List<Long> goodsIds = indexConfigs.stream().map(IndexConfig::getGoodsId).collect(Collectors.toList());
-            List<GanItems> newBeeMallGoods = goodsMapper.selectByPrimaryKeys(goodsIds);
-            ganIndexConfigItemsVOS = BeanUtil.copyList(newBeeMallGoods, GanIndexConfigItemsVO.class);
+            List<GanItems> ganItems = goodsMapper.selectByPrimaryKeys(goodsIds);
+            ganIndexConfigItemsVOS = BeanUtil.copyList(ganItems, GanIndexConfigItemsVO.class);
             for (GanIndexConfigItemsVO ganIndexConfigItemsVO : ganIndexConfigItemsVOS) {
                 String goodsName = ganIndexConfigItemsVO.getGoodsName();
                 String goodsIntro = ganIndexConfigItemsVO.getGoodsIntro();
@@ -53,7 +60,6 @@ public class GanIndexConfigServiceImpl implements GanIndexConfigService {
         }
         return ganIndexConfigItemsVOS;
     }
-
 
     @Override
     public PageResult getConfigsPage(PageQueryUtil pageUtil) {
@@ -98,11 +104,6 @@ public class GanIndexConfigServiceImpl implements GanIndexConfigService {
         return ServiceResultEnum.DB_ERROR.getResult();
     }
 
-    @Override
-    public IndexConfig getIndexConfigById(Long id) {
-        return indexConfigMapper.selectByPrimaryKey(id);
-    }
-
 
     @Override
     public Boolean deleteBatch(Long[] ids) {
@@ -112,6 +113,7 @@ public class GanIndexConfigServiceImpl implements GanIndexConfigService {
         //删除数据
         return indexConfigMapper.deleteBatch(ids) > 0;
     }
+
 }
 
 
