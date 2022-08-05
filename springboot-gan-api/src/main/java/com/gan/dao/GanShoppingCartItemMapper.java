@@ -16,13 +16,13 @@ public interface GanShoppingCartItemMapper {
 
     GanShoppingCartItem selectByPrimaryKey(Long cartItemId);
 
-    GanShoppingCartItem selectByUserIdAndGoodsId(@Param("newBeeMallUserId") Long newBeeMallUserId, @Param("goodsId") Long goodsId);
+    GanShoppingCartItem selectByUserIdAndGoodsId(@Param("ganUserId") Long ganUserId, @Param("goodsId") Long goodsId);
 
-    List<GanShoppingCartItem> selectByUserId(@Param("newBeeMallUserId") Long newBeeMallUserId, @Param("number") int number);
+    List<GanShoppingCartItem> selectByUserId(@Param("ganUserId") Long ganUserId, @Param("number") int number);
 
-    List<GanShoppingCartItem> selectByUserIdAndCartItemIds(@Param("newBeeMallUserId") Long newBeeMallUserId, @Param("cartItemIds") List<Long> cartItemIds);
+    List<GanShoppingCartItem> selectByUserIdAndCartItemIds(@Param("ganUserId") Long ganUserId, @Param("cartItemIds") List<Long> cartItemIds);
 
-    int selectCountByUserId(Long newBeeMallUserId);
+    int selectCountByUserId(Long ganUserId);
 
     int updateByPrimaryKeySelective(GanShoppingCartItem record);
 

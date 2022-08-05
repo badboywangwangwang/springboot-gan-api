@@ -24,14 +24,14 @@
         select
         <include refid="Base_Column_List"/>
         from springboot_gan_shopping_cart_item
-        where user_id = #{newBeeMallUserId,jdbcType=BIGINT} and goods_id=#{goodsId,jdbcType=BIGINT} and is_deleted = 0
+        where user_id = #{ganUserId,jdbcType=BIGINT} and goods_id=#{goodsId,jdbcType=BIGINT} and is_deleted = 0
         limit 1
     </select>
     <select id="selectByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from springboot_gan_shopping_cart_item
-        where user_id = #{newBeeMallUserId,jdbcType=BIGINT} and is_deleted = 0
+        where user_id = #{ganUserId,jdbcType=BIGINT} and is_deleted = 0
         limit #{number}
     </select>
     <select id="findMyganCartItems" resultMap="BaseResultMap">
@@ -58,13 +58,13 @@
         <foreach item="id" collection="cartItemIds" open="(" separator="," close=")">
             #{id}
         </foreach>
-        and user_id = #{newBeeMallUserId,jdbcType=BIGINT} and is_deleted = 0
+        and user_id = #{ganUserId,jdbcType=BIGINT} and is_deleted = 0
     </select>
     <select id="selectCountByUserId" resultType="int">
     select
     count(*)
     from springboot_gan_shopping_cart_item
-    where user_id = #{newBeeMallUserId,jdbcType=BIGINT} and is_deleted = 0
+    where user_id = #{ganUserId,jdbcType=BIGINT} and is_deleted = 0
   </select>
     <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
     update springboot_gan_shopping_cart_item set is_deleted = 1

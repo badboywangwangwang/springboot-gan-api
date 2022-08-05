@@ -44,7 +44,7 @@ public interface GanItemsMapper {
 
     int getTotalGanItemsBySearch(PageQueryUtil pageUtil);
 
-    int batchInsert(@Param("newBeeMallGoodsList") List<GanItems> newBeeMallGoodsList);
+    int batchInsert(@Param("ganItemsList") List<GanItems> ganItemsList);
 
     int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
 

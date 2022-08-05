@@ -37,7 +37,7 @@
         goods_detail_content,original_price,
         selling_price, stock_num)
         VALUES
-        <foreach collection="newBeeMallGoodsList" item="goods" separator=",">
+        <foreach collection="ganItemsList" item="goods" separator=",">
             (#{goods.goodsName},#{goods.goodsIntro},#{goods.goodsCategoryId},#{goods.goodsCoverImg},#{goods.goodsCarousel},#{goods.goodsDetailContent},#{goods.originalPrice},#{goods.sellingPrice},#{goods.stockNum})
         </foreach>
     </insert>
