@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@Api(value = "v1", tags = "5.新蜂商城购物车相关接口")
+@Api(value = "v1", tags = "5.购物车相关接口")
 @RequestMapping("/api/v1")
 public class GanShoppingCartAPI {
 
@@ -80,15 +80,15 @@ public class GanShoppingCartAPI {
         return ResultGenerator.genFailResult(updateResult);
     }
 
-    @DeleteMapping("/shop-cart/{newBeeMallShoppingCartItemId}")
+    @DeleteMapping("/shop-cart/{ganShoppingCartItemId}")
     @ApiOperation(value = "删除购物项", notes = "传参为购物项id")
-    public Result updateGanShoppingCartItem(@PathVariable("newBeeMallShoppingCartItemId") Long newBeeMallShoppingCartItemId,
+    public Result updateGanShoppingCartItem(@PathVariable("ganShoppingCartItemId") Long ganShoppingCartItemId,
                                                    @TokenToUser GanUser loginGanUser) {
-        GanShoppingCartItem ganShoppingCartItemById = ganShoppingCartService.getGanCartItemById(newBeeMallShoppingCartItemId);
+        GanShoppingCartItem ganShoppingCartItemById = ganShoppingCartService.getGanCartItemById(ganShoppingCartItemId);
         if (!loginGanUser.getUserId().equals(ganShoppingCartItemById.getUserId())) {
             return ResultGenerator.genFailResult(ServiceResultEnum.REQUEST_FORBIDEN_ERROR.getResult());
         }
-        Boolean deleteResult = ganShoppingCartService.deleteById(newBeeMallShoppingCartItemId,loginGanUser.getUserId());
+        Boolean deleteResult = ganShoppingCartService.deleteById(ganShoppingCartItemId,loginGanUser.getUserId());
         //删除成功
         if (deleteResult) {
             return ResultGenerator.genSuccessResult();
@@ -110,8 +110,8 @@ public class GanShoppingCartAPI {
             GanException.fail("参数异常");
         } else {
             //总价
-            for (GanShoppingCartItemVO newBeeMallShoppingCartItemVO : itemsForSettle) {
-                priceTotal += newBeeMallShoppingCartItemVO.getGoodsCount() * newBeeMallShoppingCartItemVO.getSellingPrice();
+            for (GanShoppingCartItemVO ganShoppingCartItemVO : itemsForSettle) {
+                priceTotal += ganShoppingCartItemVO.getGoodsCount() * ganShoppingCartItemVO.getSellingPrice();
             }
             if (priceTotal < 1) {
                 GanException.fail("价格异常");

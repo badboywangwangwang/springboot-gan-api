@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
- * newbee-mall全局异常处理
+ * 全局异常处理
  */
 @RestControllerAdvice
 public class GanExceptionHandler {

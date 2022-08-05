@@ -72,12 +72,12 @@ public class GanUserAddressAPI {
     public Result<GanUserAddressVO> getGanUserAddress(@PathVariable("addressId") Long addressId,
                                                               @TokenToUser GanUser loginGanUser) {
         GanUserAddress mallUserAddressById = ganUserAddressService.getGanUserAddressById(addressId);
-        GanUserAddressVO newBeeGanUserAddressVO = new GanUserAddressVO();
-        BeanUtil.copyProperties(mallUserAddressById, newBeeGanUserAddressVO);
+        GanUserAddressVO ganUserAddressVO = new GanUserAddressVO();
+        BeanUtil.copyProperties(mallUserAddressById, ganUserAddressVO);
         if (!loginGanUser.getUserId().equals(mallUserAddressById.getUserId())) {
             return ResultGenerator.genFailResult(ServiceResultEnum.REQUEST_FORBIDEN_ERROR.getResult());
         }
-        return ResultGenerator.genSuccessResult(newBeeGanUserAddressVO);
+        return ResultGenerator.genSuccessResult(ganUserAddressVO);
     }
 
     @GetMapping("/address/default")

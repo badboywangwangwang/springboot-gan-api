@@ -23,9 +23,9 @@ public enum GanOrderStatusEnum {
     }
 
     public static GanOrderStatusEnum getGanOrderStatusEnumByStatus(int orderStatus) {
-        for (GanOrderStatusEnum newBeeMallOrderStatusEnum : GanOrderStatusEnum.values()) {
-            if (newBeeMallOrderStatusEnum.getOrderStatus() == orderStatus) {
-                return newBeeMallOrderStatusEnum;
+        for (GanOrderStatusEnum ganOrderStatusEnum : GanOrderStatusEnum.values()) {
+            if (ganOrderStatusEnum.getOrderStatus() == orderStatus) {
+                return ganOrderStatusEnum;
             }
         }
         return DEFAULT;

@@ -117,7 +117,7 @@ public class GanOrderServiceImpl implements GanOrderService {
                     //封装每个订单列表对象的订单项数据
                     if (itemByOrderIdMap.containsKey(ganOrderListVO.getOrderId())) {
                         List<GanOrderItem> orderItemListTemp = itemByOrderIdMap.get(ganOrderListVO.getOrderId());
-                        //将NewBeeMallOrderItem对象列表转换成NewBeeMallOrderItemVO对象列表
+                        //将GanOrderItem对象列表转换成GanOrderItemVO对象列表
                         List<GanOrderItemVO> ganOrderItemVOS = BeanUtil.copyList(orderItemListTemp, GanOrderItemVO.class);
                         ganOrderListVO.setGanOrderItemVOS(ganOrderItemVOS);
                     }

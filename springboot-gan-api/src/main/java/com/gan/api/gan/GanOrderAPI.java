@@ -90,8 +90,8 @@ public class GanOrderAPI {
             GanException.fail("参数异常");
         } else {
             //总价
-            for (GanShoppingCartItemVO newBeeMallShoppingCartItemVO : itemsForSave) {
-                priceTotal += newBeeMallShoppingCartItemVO.getGoodsCount() * newBeeMallShoppingCartItemVO.getSellingPrice();
+            for (GanShoppingCartItemVO ganShoppingCartItemVO : itemsForSave) {
+                priceTotal += ganShoppingCartItemVO.getGoodsCount() * ganShoppingCartItemVO.getSellingPrice();
             }
             if (priceTotal < 1) {
                 GanException.fail("价格异常");
